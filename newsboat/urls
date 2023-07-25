@@ -1,0 +1,50 @@
+# To add URLs that have restricted access via username/password,
+# simply provide the username/password in the following way:
+#
+# http://username:password@hostname.domain.tld/feed.rss
+#
+# All unread articles in all feeds
+#
+"query:Unread Articles:unread = \"yes\""
+#
+#-------------------------
+#-------NEWSFEEDS---------
+#-------------------------
+http://rss.cnn.com/rss/cnn_topstories.rss "~NEWS: CNN"
+http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml "~NEWS: BBC"
+http://www.vox.com/rss/index.xml "~NEWS: VOX"
+https://newsboat.org/news.atom "~NEWS: Newsboat"
+#-------------------------
+#-------YOUTUBE-----------
+#-------------------------
+https://www.youtube.com/feeds/videos.xml?channel_id=UC1aQCduPHWSXX5UgfHCyVCA "~YOUTUBE: Doctorfree"
+#-------------------------
+#-------REDDIT------------
+#-------------------------
+https://www.reddit.com/r/ascii.rss "~REDDIT: r/ascii"
+https://www.reddit.com/r/asciiart.rss "~REDDIT: r/asciiart"
+https://www.reddit.com/r/commandline.rss "~REDDIT: r/commandline"
+https://www.reddit.com/r/linux.rss "~REDDIT: r/linux"
+https://www.reddit.com/r/magicmirror.rss "~REDDIT: r/magicmirror"
+https://www.reddit.com/r/opensource.rss "~REDDIT: r/opensource"
+#-------------------------
+#-------TWITTER-----------
+#-------------------------
+https://nitter.net/search/rss?f=tweets&q=ronrecord "~TWITTER: ronrecord"
+#-------------------------
+#-------GIT_REPOS---------
+#-------------------------
+https://github.com/doctorfree.atom "~GITHUB: Doctorfree"
+#-------------------------
+#-------BLOGS-------------
+#-------------------------
+https://blog.ronrecord.com/index.php/feed/ "~BLOG: Doctorwhen
+https://github.blog/feed/ "~BLOG: Github"
+https://github.blog/category/open-source/feed/ "~BLOG: Github Open Source"
+#-------------------------
+#-------FUN---------------
+#-------------------------
+http://xkcd.com/atom.xml "~FUN: xkcd"
+http://www.dumbingofage.com/feed/ "~FUN: Dumbing of Age"
+http://feeds.feedburner.com/oatmealfeed "~FUN: Oatmeal"
+http://www.smbc-comics.com/rss.php "~FUN: Saturday Morning Breakfast Cereal"

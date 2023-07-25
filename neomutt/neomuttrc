@@ -1,0 +1,20 @@
+
+source ~/.config/neomutt/colors
+source ~/.config/neomutt/headers
+source ~/.config/neomutt/hooks
+source ~/.config/neomutt/mappings
+source ~/.config/neomutt/settings
+
+# Accounts
+
+source ~/.config/neomutt/accounts/gmail
+folder-hook  $folder 'source ~/.config/neomutt/accounts/gmail'
+
+#source ~/.config/neomutt/accounts/cruzio
+#folder-hook  $folder 'source ~/.config/neomutt/accounts/cruzio'
+
+#source ~/.config/neomutt/accounts/main
+#folder-hook  $folder 'source ~/.config/neomutt/accounts/main'
+
+#source ~/.config/neomutt/accounts/nntp
+#folder-hook  $folder 'source ~/.config/neomutt/accounts/nntp'

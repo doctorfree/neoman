@@ -1,0 +1,13 @@
+neomutt/certificate*
+neomutt/*.gpg
+tmp
+*/tmp
+
+# vim files
+.*.sw[a-z]
+*.un~
+Session.vim
+.netrwhist
+
+#do not ignore .github directory
+!.github
