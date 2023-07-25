@@ -1,0 +1,3 @@
+?package(neoman):needs="text" section="Applications/Misc" \
+  title="neoman" longtitle="Neovim/NeoMutt Manager" \
+  command="/usr/bin/neoman" hints="Neovim"

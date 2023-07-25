@@ -1,0 +1,90 @@
+#!/bin/bash
+#
+# shellcheck disable=SC1090,SC2001
+
+PKG="neoman"
+DESTDIR="/usr"
+SUDO=sudo
+platform=$(uname -s)
+[ "${platform}" == "Darwin" ] && DESTDIR="/usr/local"
+
+usage() {
+  printf "\n\nUsage: ./install"
+  printf "\n\n\tMust be run as a user with sudo privilege from inside"
+  printf "\n\ta neoman git repository previously cloned with the command:"
+  printf "\n\t\tgit clone https://github.com/doctorfree/neoman"
+  printf "\n\tAfter cloning, 'cd neoman' and run the command './install'\n"
+  exit 1
+}
+
+if [ -f neoman.desktop ]
+then
+  [ -f neoman ] || usage
+else
+  usage
+fi
+
+for dir in "${DESTDIR}" "${DESTDIR}/share" "${DESTDIR}/share/man" \
+  "${DESTDIR}/share/applications" "${DESTDIR}/share/doc" \
+  "${DESTDIR}/share/doc/${PKG}" \
+  "${DESTDIR}/share/${PKG}"; do
+  [ -d "${dir}" ] || ${SUDO} mkdir -p "${dir}"
+done
+
+${SUDO} cp neoman "${DESTDIR}"/bin
+${SUDO} cp neoman.desktop "${DESTDIR}/share/applications"
+[ -d "${DESTDIR}/share/${PKG}/btop" ] || {
+  ${SUDO} cp -a btop "${DESTDIR}/share/${PKG}/btop"
+}
+[ -d "${DESTDIR}/share/${PKG}/kitty" ] || {
+  ${SUDO} cp -a kitty "${DESTDIR}/share/${PKG}/kitty"
+}
+[ -d "${DESTDIR}/share/${PKG}/neomutt" ] || {
+  ${SUDO} cp -a neomutt "${DESTDIR}/share/${PKG}/neomutt"
+}
+[ -d "${DESTDIR}/share/${PKG}/newsboat" ] || {
+  ${SUDO} cp -a newsboat "${DESTDIR}/share/${PKG}/newsboat"
+}
+[ -d "${DESTDIR}/share/${PKG}/w3m" ] || {
+  ${SUDO} cp -a w3m "${DESTDIR}/share/${PKG}/w3m"
+}
+[ -f "${DESTDIR}/share/${PKG}/tmux.conf" ] || {
+  ${SUDO} cp tmux.conf "${DESTDIR}/share/${PKG}"
+}
+[ -f "${DESTDIR}/share/${PKG}/rigle.conf" ] || {
+  ${SUDO} cp rifle.conf "${DESTDIR}/share/${PKG}"
+}
+${SUDO} cp copyright "${DESTDIR}/share/doc/${PKG}"
+${SUDO} cp LICENSE "${DESTDIR}/share/doc/${PKG}"
+${SUDO} cp CHANGELOG.md "${DESTDIR}/share/doc/${PKG}"
+${SUDO} cp README.md "${DESTDIR}/share/doc/${PKG}"
+${SUDO} cp VERSION "${DESTDIR}/share/doc/${PKG}"
+${SUDO} gzip -9 "${DESTDIR}/share/doc/${PKG}/CHANGELOG.md"
+
+# ${SUDO} cp -a man/man1 "${DESTDIR}"/share/man/man1
+
+${SUDO} cp share/menu/neoman "${DESTDIR}/share/menu/neoman"
+[ -d "${DESTDIR}/share/figlet-fonts" ] || {
+  ${SUDO} cp -a share/figlet-fonts "${DESTDIR}/share/figlet-fonts"
+}
+[ -d "${DESTDIR}/share/neofetch-themes" ] || {
+  ${SUDO} cp -a share/neofetch-themes "${DESTDIR}/share/neofetch-themes"
+}
+
+${SUDO} chmod 644 "${DESTDIR}"/share/figlet-fonts/*
+find "${DESTDIR}/share/doc/${PKG}" -type d | while read -r dir; do
+  ${SUDO} chmod 755 "${dir}"
+done
+find "${DESTDIR}/share/doc/${PKG}" -type f | while read -r f; do
+  ${SUDO} chmod 644 "${f}"
+done
+find "${DESTDIR}/share/${PKG}" -type d | while read -r dir; do
+  ${SUDO} chmod 755 "${dir}"
+done
+find "${DESTDIR}/share/${PKG}" -type f | while read -r f; do
+  ${SUDO} chmod 644 "${f}"
+done
+${SUDO} chmod 755 "${DESTDIR}"/bin/neoman \
+  "${DESTDIR}"/share/${PKG}/newsboat/*.sh \
+  "${DESTDIR}"/share/${PKG}/newsboat/scripts/* \
+  "${DESTDIR}"/share/${PKG}/newsboat/scripts/*/*
