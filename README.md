@@ -15,6 +15,8 @@ All of these are powerful, configurable, character-based programs. Neoman
 automates the installation, initialization, configuration, and management
 of these tools using a command line and character menu interface.
 
+[Note:] This project is in early development and not yet ready to install
+
 ## Installation
 
 The initial installation of Neoman should be performed by a user with
