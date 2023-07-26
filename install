@@ -9,7 +9,10 @@ platform=$(uname -s)
 [ "${platform}" == "Darwin" ] && DESTDIR="/usr/local"
 
 usage() {
-  printf "\n\nUsage: ./install"
+  printf "\n\nUsage: ./install [-n] [-u]"
+  printf "\nWhere:"
+  printf "\n\t-n indicates dry run, tell me what you would do but don't do it"
+  printf "\n\t-u displays this usage message and exits"
   printf "\n\n\tMust be run as a user with sudo privilege from inside"
   printf "\n\ta neoman git repository previously cloned with the command:"
   printf "\n\t\tgit clone https://github.com/doctorfree/neoman"
@@ -24,67 +27,206 @@ else
   usage
 fi
 
+tellme=
+while getopts ":nu" flag; do
+  case $flag in
+    n)
+      tellme=1
+      ;;
+    u)
+      usage
+      ;;
+    \?)
+      echo "Invalid option: $flag"
+      usage
+      ;;
+  esac
+done
+shift $(( OPTIND - 1 ))
+
 for dir in "${DESTDIR}" "${DESTDIR}/share" "${DESTDIR}/share/man" \
   "${DESTDIR}/share/applications" "${DESTDIR}/share/doc" \
   "${DESTDIR}/share/doc/${PKG}" \
   "${DESTDIR}/share/${PKG}"; do
-  [ -d "${dir}" ] || ${SUDO} mkdir -p "${dir}"
+  [ -d "${dir}" ] || {
+    if [ "${tellme}" ]
+    then
+      echo "${SUDO} mkdir -p ${dir}"
+    else
+      ${SUDO} mkdir -p "${dir}"
+    fi
+  }
 done
 
-${SUDO} cp neoman "${DESTDIR}"/bin
-${SUDO} cp neoman.desktop "${DESTDIR}/share/applications"
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp neoman ${DESTDIR}/bin"
+else
+  ${SUDO} cp neoman "${DESTDIR}"/bin
+fi
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp neoman.desktop ${DESTDIR}/share/applications"
+else
+  ${SUDO} cp neoman.desktop "${DESTDIR}/share/applications"
+fi
 [ -d "${DESTDIR}/share/${PKG}/btop" ] || {
-  ${SUDO} cp -a btop "${DESTDIR}/share/${PKG}/btop"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp -a btop ${DESTDIR}/share/${PKG}/btop"
+  else
+    ${SUDO} cp -a btop "${DESTDIR}/share/${PKG}/btop"
+  fi
 }
 [ -d "${DESTDIR}/share/${PKG}/kitty" ] || {
-  ${SUDO} cp -a kitty "${DESTDIR}/share/${PKG}/kitty"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp -a kitty ${DESTDIR}/share/${PKG}/kitty"
+  else
+    ${SUDO} cp -a kitty "${DESTDIR}/share/${PKG}/kitty"
+  fi
 }
 [ -d "${DESTDIR}/share/${PKG}/neomutt" ] || {
-  ${SUDO} cp -a neomutt "${DESTDIR}/share/${PKG}/neomutt"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp -a neomutt ${DESTDIR}/share/${PKG}/neomutt"
+  else
+    ${SUDO} cp -a neomutt "${DESTDIR}/share/${PKG}/neomutt"
+  fi
 }
 [ -d "${DESTDIR}/share/${PKG}/newsboat" ] || {
-  ${SUDO} cp -a newsboat "${DESTDIR}/share/${PKG}/newsboat"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp -a newsboat ${DESTDIR}/share/${PKG}/newsboat"
+  else
+    ${SUDO} cp -a newsboat "${DESTDIR}/share/${PKG}/newsboat"
+  fi
 }
 [ -d "${DESTDIR}/share/${PKG}/w3m" ] || {
-  ${SUDO} cp -a w3m "${DESTDIR}/share/${PKG}/w3m"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp -a w3m ${DESTDIR}/share/${PKG}/w3m"
+  else
+    ${SUDO} cp -a w3m "${DESTDIR}/share/${PKG}/w3m"
+  fi
 }
 [ -f "${DESTDIR}/share/${PKG}/tmux.conf" ] || {
-  ${SUDO} cp tmux.conf "${DESTDIR}/share/${PKG}"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp tmux.conf ${DESTDIR}/share/${PKG}"
+  else
+    ${SUDO} cp tmux.conf "${DESTDIR}/share/${PKG}"
+  fi
 }
 [ -f "${DESTDIR}/share/${PKG}/rigle.conf" ] || {
-  ${SUDO} cp rifle.conf "${DESTDIR}/share/${PKG}"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp rifle.conf ${DESTDIR}/share/${PKG}"
+  else
+    ${SUDO} cp rifle.conf "${DESTDIR}/share/${PKG}"
+  fi
 }
-${SUDO} cp copyright "${DESTDIR}/share/doc/${PKG}"
-${SUDO} cp LICENSE "${DESTDIR}/share/doc/${PKG}"
-${SUDO} cp CHANGELOG.md "${DESTDIR}/share/doc/${PKG}"
-${SUDO} cp README.md "${DESTDIR}/share/doc/${PKG}"
-${SUDO} cp VERSION "${DESTDIR}/share/doc/${PKG}"
-${SUDO} gzip -9 "${DESTDIR}/share/doc/${PKG}/CHANGELOG.md"
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp copyright ${DESTDIR}/share/doc/${PKG}"
+else
+  ${SUDO} cp copyright "${DESTDIR}/share/doc/${PKG}"
+fi
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp LICENSE ${DESTDIR}/share/doc/${PKG}"
+else
+  ${SUDO} cp LICENSE "${DESTDIR}/share/doc/${PKG}"
+fi
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp CHANGELOG.md ${DESTDIR}/share/doc/${PKG}"
+else
+  ${SUDO} cp CHANGELOG.md "${DESTDIR}/share/doc/${PKG}"
+fi
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp README.md ${DESTDIR}/share/doc/${PKG}"
+else
+  ${SUDO} cp README.md "${DESTDIR}/share/doc/${PKG}"
+fi
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp VERSION ${DESTDIR}/share/doc/${PKG}"
+else
+  ${SUDO} cp VERSION "${DESTDIR}/share/doc/${PKG}"
+fi
 
-# ${SUDO} cp -a man/man1 "${DESTDIR}"/share/man/man1
-
-${SUDO} cp share/menu/neoman "${DESTDIR}/share/menu/neoman"
+if [ "${tellme}" ]
+then
+  echo "${SUDO} cp share/menu/neoman ${DESTDIR}/share/menu/neoman"
+else
+  ${SUDO} cp share/menu/neoman "${DESTDIR}/share/menu/neoman"
+fi
 [ -d "${DESTDIR}/share/figlet-fonts" ] || {
-  ${SUDO} cp -a share/figlet-fonts "${DESTDIR}/share/figlet-fonts"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp -a share/figlet-fonts ${DESTDIR}/share/figlet-fonts"
+  else
+    ${SUDO} cp -a share/figlet-fonts "${DESTDIR}/share/figlet-fonts"
+  fi
 }
 [ -d "${DESTDIR}/share/neofetch-themes" ] || {
-  ${SUDO} cp -a share/neofetch-themes "${DESTDIR}/share/neofetch-themes"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} cp -a share/neofetch-themes ${DESTDIR}/share/neofetch-themes"
+  else
+    ${SUDO} cp -a share/neofetch-themes "${DESTDIR}/share/neofetch-themes"
+  fi
 }
 
-${SUDO} chmod 644 "${DESTDIR}"/share/figlet-fonts/*
+if [ "${tellme}" ]
+then
+  echo "${SUDO} chmod 644 ${DESTDIR}/share/figlet-fonts/*"
+else
+  ${SUDO} chmod 644 "${DESTDIR}"/share/figlet-fonts/*
+fi
 find "${DESTDIR}/share/doc/${PKG}" -type d | while read -r dir; do
-  ${SUDO} chmod 755 "${dir}"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} chmod 755 ${dir}"
+  else
+    ${SUDO} chmod 755 "${dir}"
+  fi
 done
 find "${DESTDIR}/share/doc/${PKG}" -type f | while read -r f; do
-  ${SUDO} chmod 644 "${f}"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} chmod 644 ${f}"
+  else
+    ${SUDO} chmod 644 "${f}"
+  fi
 done
 find "${DESTDIR}/share/${PKG}" -type d | while read -r dir; do
-  ${SUDO} chmod 755 "${dir}"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} chmod 755 ${dir}"
+  else
+    ${SUDO} chmod 755 "${dir}"
+  fi
 done
 find "${DESTDIR}/share/${PKG}" -type f | while read -r f; do
-  ${SUDO} chmod 644 "${f}"
+  if [ "${tellme}" ]
+  then
+    echo "${SUDO} chmod 644 ${f}"
+  else
+    ${SUDO} chmod 644 "${f}"
+  fi
 done
-${SUDO} chmod 755 "${DESTDIR}"/bin/neoman \
-  "${DESTDIR}"/share/${PKG}/newsboat/*.sh \
-  "${DESTDIR}"/share/${PKG}/newsboat/scripts/* \
-  "${DESTDIR}"/share/${PKG}/newsboat/scripts/*/*
+if [ "${tellme}" ]
+then
+  echo "${SUDO} chmod 755 ${DESTDIR}/bin/neoman \
+    ${DESTDIR}/share/${PKG}/newsboat/*.sh \
+    ${DESTDIR}/share/${PKG}/newsboat/scripts/* \
+    ${DESTDIR}/share/${PKG}/newsboat/scripts/*/*"
+else
+  ${SUDO} chmod 755 "${DESTDIR}"/bin/neoman \
+    "${DESTDIR}"/share/${PKG}/newsboat/*.sh \
+    "${DESTDIR}"/share/${PKG}/newsboat/scripts/* \
+    "${DESTDIR}"/share/${PKG}/newsboat/scripts/*/*
+fi
