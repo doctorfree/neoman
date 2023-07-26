@@ -2,6 +2,8 @@
 
 ---
 
+This is part of the [Neoman project](https://github.com/doctorfree/neoman#readme)
+
 <p align="center">
   <img width="1000" src="https://cdn.discordapp.com/attachments/635625925748457482/864406818545860659/unknown.png" alt="Material Bread logo">
 </p>
@@ -10,7 +12,7 @@ A project which aims at making your life more convenient by putting a bunch of n
 
 Video Showcase/Tutorial: https://www.youtube.com/watch?v=aQ44CafqcH0&feature=youtu.be
 
-<h4 align="center"> 
+<h4 align="center">
 <a href="https://discord.gg/tuWnYReXbS">Discord</a> • <a href="https://www.reddit.com/user/Chicki2D/">Reddit</a> • <a href="https://github.com/Chick2D">Github</a>
 </h4>
 
@@ -139,7 +141,7 @@ Fun fact: This is called af++ or AxylFetch++ because this was actually based on 
 
 ### [FAQs](https://github.com/Chick2D/neofetch-themes/wiki/FAQs)
 
-### Installation 
+### Installation
 ---
 
 <details>
@@ -168,7 +170,7 @@ git clone https://github.com/Chick2D/neofetch-themes/
 ```
 in your preferred folder.
 
-3. Run 
+3. Run
 ```bash
 cat neofetch-themes/<folder>/<file> > ~/.config/neofetch/config.conf
 ```
