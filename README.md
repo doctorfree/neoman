@@ -26,7 +26,7 @@ The initial installation of Neoman should be performed by a user with
 ```bash
 # Install neoman with the following two commands:
 git clone https://github.com/doctorfree/neoman $HOME/.config/neoman
-$HOME/.config/neoman/install
+$HOME/.config/neoman/neoman
 ```
 
 Subsequent use of the `neoman` command does not require `sudo` privilege and

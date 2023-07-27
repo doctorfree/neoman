@@ -14,6 +14,7 @@ else
 fi
 CONFDIR=${TOP}/share/neoman
 USERCONF="${HOME}/.config"
+NEOMANDIR="${USERCONF}/neoman"
 GHUC="https://raw.githubusercontent.com"
 OWNER=doctorfree
 BOLD=$(tput bold 2>/dev/null)
@@ -629,6 +630,7 @@ argument=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 [ -d ${USERCONF} ] || mkdir -p ${USERCONF}
 
 have_curl=$(type -p curl)
+have_git=$(type -p git)
 have_jq=$(type -p jq)
 have_wget=$(type -p wget)
 have_awk=$(type -p awk)
@@ -643,6 +645,35 @@ else
   usebrew=
 fi
 [ "${argument}" == "brew" ] && usebrew=1
+
+[ -f "${NEOMANDIR}/.initialized" ] || {
+  [ -d "${NEOMANDIR}" ] || {
+    [ "${have_git}" ] || {
+      install_package git
+      have_git=$(type -p git)
+      [ "${have_git}" ] || {
+        printf "\n\nThe 'git' command is required to bootstrap Neoman"
+        printf "\n\nInstall git and rerun 'neoman'\n"
+        exit 1
+      }
+    }
+    git clone https://github.com/doctorfree/neoman "${NEOMANDIR}"
+  }
+  if [ -x "${NEOMANDIR}/scripts/install_configs.sh" ]
+  then
+    sudo "${NEOMANDIR}"/scripts/install_configs.sh -s "${NEOMANDIR}"
+  else
+    if [ -f "${NEOMANDIR}/scripts/install_configs.sh" ]
+    then
+      chmod 755 "${NEOMANDIR}/scripts/install_configs.sh"
+      sudo "${NEOMANDIR}"/scripts/install_configs.sh -s "${NEOMANDIR}"
+    else
+      printf "\n\nThe ${NEOMANDIR}/scripts/install_configs.sh does not exist"
+      printf "\n\nReinstall Neoman\n"
+      exit 1
+    fi
+  fi
+}
 
 have_kitty=$(type -p kitty)
 [ "${argument}" == "kitty" ] && {

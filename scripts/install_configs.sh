@@ -4,14 +4,16 @@
 
 PKG="neoman"
 DESTDIR="/usr"
+NEOMANDIR="${HOME}/.config/neoman"
 SUDO=sudo
 platform=$(uname -s)
 [ "${platform}" == "Darwin" ] && DESTDIR="/usr/local"
 
 usage() {
-  printf "\n\nUsage: ./install [-n] [-u]"
+  printf "\n\nUsage: ./install [-n] [-s path] [-u]"
   printf "\nWhere:"
   printf "\n\t-n indicates dry run, tell me what you would do but don't do it"
+  printf "\n\t-s 'path' indicates do not use sudo, use 'path' as Neoman home"
   printf "\n\t-u displays this usage message and exits"
   printf "\n\n\tMust be run as a user with sudo privilege from inside"
   printf "\n\ta neoman git repository previously cloned with the command:"
@@ -20,18 +22,15 @@ usage() {
   exit 1
 }
 
-if [ -f neoman.desktop ]
-then
-  [ -f neoman ] || usage
-else
-  usage
-fi
-
 tellme=
-while getopts ":nu" flag; do
+while getopts ":ns:u" flag; do
   case $flag in
     n)
       tellme=1
+      ;;
+    s)
+      NEOMANDIR="${OPTARG}"
+      SUDO=
       ;;
     u)
       usage
@@ -43,6 +42,15 @@ while getopts ":nu" flag; do
   esac
 done
 shift $(( OPTIND - 1 ))
+
+if [ -d "${NEOMANDIR}" ]
+then
+  cd "${NEOMANDIR}"
+else
+  printf "\n\n${NEOMANDIR} does not exist or is not a directory"
+  printf "\nReinstall Neoman"
+  exit 1
+fi
 
 for dir in "${DESTDIR}" "${DESTDIR}/share" "${DESTDIR}/share/man" \
   "${DESTDIR}/share/applications" "${DESTDIR}/share/doc" \
