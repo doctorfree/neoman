@@ -67,23 +67,45 @@ remove_package() {
   have_brew=$(type -p brew)
   [ "${have_brew}" ] || usebrew=
   if [ "${usebrew}" ]; then
-    brew uninstall -q ${PKG} >/dev/null 2>&1
+    if [ "${tellme}" ]
+    then
+      echo "brew uninstall -q ${PKG}"
+    else
+      brew uninstall -q ${PKG} >/dev/null 2>&1
+    fi
   else
     if [ "${debian}" ]; then
       if [ "${APT}" ]; then
-        sudo ${APT} remove ${PKG} >/dev/null 2>&1
+        if [ "${tellme}" ]
+        then
+          echo "sudo ${APT} remove ${PKG}"
+        else
+          sudo ${APT} remove ${PKG} >/dev/null 2>&1
+        fi
       else
         [ "${quiet}" ] || printf "\n\t\tCannot locate apt to remove. Skipping ..."
       fi
     else
       if [ "${fedora}" ]; then
         if [ "${DNF}" ]; then
-          sudo ${DNF} remove ${PKG} >/dev/null 2>&1
+          if [ "${tellme}" ]
+          then
+            echo "sudo ${DNF} remove ${PKG}"
+          else
+            sudo ${DNF} remove ${PKG} >/dev/null 2>&1
+          fi
         else
           [ "${quiet}" ] || printf "\n\t\tCannot locate dnf to remove. Skipping ..."
         fi
       else
-        [ "${arch}" ] && sudo pacman -R --noconfirm ${PKG} >/dev/null 2>&1
+        [ "${arch}" ] && {
+          if [ "${tellme}" ]
+          then
+            echo "sudo pacman -R --noconfirm ${PKG}"
+          else
+            sudo pacman -R --noconfirm ${PKG} >/dev/null 2>&1
+          fi
+        }
       fi
     fi
   fi
@@ -98,27 +120,49 @@ install_package() {
   [ "${usebrew}" ] && {
     brew search -q /^${PKG}$/ >/dev/null 2>&1
     [ $? -eq 0 ] && {
-      brew install --quiet ${PKG} >/dev/null 2>&1
-      [ $? -eq 0 ] || brew link --overwrite --quiet ${PKG} >/dev/null 2>&1
+      if [ "${tellme}" ]
+      then
+        echo "brew install --quiet ${PKG}"
+      else
+        brew install --quiet ${PKG} >/dev/null 2>&1
+        [ $? -eq 0 ] || brew link --overwrite --quiet ${PKG} >/dev/null 2>&1
+      fi
       brewed=1
     }
   }
   [ "${brewed}" ] || {
     if [ "${debian}" ]; then
       if [ "${APT}" ]; then
-        sudo ${APT} install ${PKG} >/dev/null 2>&1
+        if [ "${tellme}" ]
+        then
+          echo "sudo ${APT} install ${PKG}"
+        else
+          sudo ${APT} install ${PKG} >/dev/null 2>&1
+        fi
       else
         [ "${quiet}" ] || printf "\n\t\tCannot locate apt to install. Skipping ..."
       fi
     else
       if [ "${fedora}" ]; then
         if [ "${DNF}" ]; then
-          sudo ${DNF} install ${PKG} >/dev/null 2>&1
+          if [ "${tellme}" ]
+          then
+            echo "sudo ${DNF} install ${PKG}"
+          else
+            sudo ${DNF} install ${PKG} >/dev/null 2>&1
+          fi
         else
           [ "${quiet}" ] || printf "\n\t\tCannot locate dnf to install. Skipping ..."
         fi
       else
-        [ "${arch}" ] && sudo pacman -S --noconfirm ${PKG} >/dev/null 2>&1
+        [ "${arch}" ] && {
+          if [ "${tellme}" ]
+          then
+            echo "sudo pacman -S --noconfirm ${PKG}"
+          else
+            sudo pacman -S --noconfirm ${PKG} >/dev/null 2>&1
+          fi
+        }
       fi
     fi
   }
@@ -155,8 +199,14 @@ install_pipx() {
   [ "${quiet}" ] || {
     printf "\n\tInstalling pipx ..."
   }
-  ${PYTHON} -m pip install --user pipx >/dev/null 2>&1
-  ${PYTHON} -m pipx ensurepath --force >/dev/null 2>&1
+  if [ "${tellme}" ]
+  then
+    echo "${PYTHON} -m pip install --user pipx"
+    echo "${PYTHON} -m pipx ensurepath --force"
+  else
+    ${PYTHON} -m pip install --user pipx >/dev/null 2>&1
+    ${PYTHON} -m pipx ensurepath --force >/dev/null 2>&1
+  fi
   [ "${quiet}" ] || {
     printf " done"
   }
@@ -206,31 +256,59 @@ install_external_package() {
     if [ "${debian}" ]; then
       [ "${have_wget}" ] && {
         TEMP_DEB="$(mktemp --suffix=.deb)"
-        wget --quiet -O "${TEMP_DEB}" "${DL_URL}" >/dev/null 2>&1
-        chmod 644 "${TEMP_DEB}"
-        [ "${APT}" ] && sudo ${APT} install "${TEMP_DEB}" >/dev/null 2>&1
+        if [ "${tellme}" ]
+        then
+          echo "wget --quiet -O ${TEMP_DEB} ${DL_URL}"
+          echo "chmod 644 ${TEMP_DEB}"
+          [ "${APT}" ] && echo "sudo ${APT} install ${TEMP_DEB}"
+        else
+          wget --quiet -O "${TEMP_DEB}" "${DL_URL}" >/dev/null 2>&1
+          chmod 644 "${TEMP_DEB}"
+          [ "${APT}" ] && sudo ${APT} install "${TEMP_DEB}" >/dev/null 2>&1
+        fi
         rm -f "${TEMP_DEB}"
       }
     else
       if [ "${centos}" ] || [ "${fedora}" ]; then
-        [ "${DNF}" ] && sudo ${DNF} install ${DL_URL} >/dev/null 2>&1
+        [ "${DNF}" ] && {
+          if [ "${tellme}" ]
+          then
+            echo "sudo ${DNF} install ${DL_URL}"
+          else
+            sudo ${DNF} install ${DL_URL} >/dev/null 2>&1
+          fi
+        }
       else
         # Until we sign Arch packages we need to download and install locally
         if [ "${arch}" ]; then
           [ "${have_wget}" ] && {
             TEMP_ARCH="$(mktemp --suffix=.zst)"
-            wget --quiet -O "${TEMP_ARCH}" "${DL_URL}" >/dev/null 2>&1
-            chmod 644 "${TEMP_ARCH}"
-            sudo pacman -U --noconfirm "${TEMP_ARCH}" >/dev/null 2>&1
+            if [ "${tellme}" ]
+            then
+              echo "wget --quiet -O ${TEMP_ARCH} ${DL_URL}"
+              echo "chmod 644 ${TEMP_ARCH}"
+              echo "sudo pacman -U --noconfirm ${TEMP_ARCH}"
+            else
+              wget --quiet -O "${TEMP_ARCH}" "${DL_URL}" >/dev/null 2>&1
+              chmod 644 "${TEMP_ARCH}"
+              sudo pacman -U --noconfirm "${TEMP_ARCH}" >/dev/null 2>&1
+            fi
             rm -f "${TEMP_ARCH}"
           }
         else
           [ "${darwin}" ] && {
             [ "${have_wget}" ] && {
               TEMP_ARCH="$(mktemp --suffix=.tgz)"
-              wget --quiet -O "${TEMP_ARCH}" "${DL_URL}" >/dev/null 2>&1
-              chmod 644 "${TEMP_ARCH}"
-              tar xzf "${TEMP_ARCH}" -C /
+              if [ "${tellme}" ]
+              then
+                echo "wget --quiet -O ${TEMP_ARCH} ${DL_URL}"
+                echo "chmod 644 ${TEMP_ARCH}"
+                echo "tar xzf ${TEMP_ARCH} -C /"
+              else
+                wget --quiet -O "${TEMP_ARCH}" "${DL_URL}" >/dev/null 2>&1
+                chmod 644 "${TEMP_ARCH}"
+                tar xzf "${TEMP_ARCH}" -C /
+              fi
               rm -f "${TEMP_ARCH}"
             }
           }
@@ -279,13 +357,32 @@ remove_games() {
     fi
     printf "\n\tRemoving asciigames package ..."
     if [ "${debian}" ]; then
-      [ "${APT}" ] && sudo ${APT} remove asciigames >/dev/null 2>&1
+      [ "${APT}" ] && {
+        if [ "${tellme}" ]
+        then
+          echo "sudo ${APT} remove asciigames"
+        else
+          sudo ${APT} remove asciigames >/dev/null 2>&1
+        fi
+      }
     else
       if [ "${centos}" ] || [ "${fedora}" ]; then
-        [ "${DNF}" ] && sudo ${DNF} remove asciigames >/dev/null 2>&1
+        [ "${DNF}" ] && {
+          if [ "${tellme}" ]
+          then
+            echo "sudo ${DNF} remove asciigames"
+          else
+            sudo ${DNF} remove asciigames >/dev/null 2>&1
+          fi
+        }
       else
         if [ "${arch}" ]; then
-          sudo pacman -R --noconfirm asciigames >/dev/null 2>&1
+          if [ "${tellme}" ]
+          then
+            echo "sudo pacman -R --noconfirm asciigames"
+          else
+            sudo pacman -R --noconfirm asciigames >/dev/null 2>&1
+          fi
         fi
       fi
     fi
@@ -443,13 +540,24 @@ install_kitty() {
 }
 
 remove_kitty() {
-  rm -rf ~/.local/kitty.app
-  rm -f ~/.local/bin/kitty
-  rm -f ~/.local/share/applications/kitty.desktop
-  rm -f ~/.local/share/applications/kitty-open.desktop
-  rm -f ~/.local/share/man/man1/kitty.1
-  rm -f ~/.local/share/man/man5/kitty.conf.5
-  [ -d /Applications/kitty.app ] && sudo rm -rf /Applications/kitty.app
+  if [ "${tellme}" ]
+  then
+    echo "rm -rf ~/.local/kitty.app"
+    echo "rm -f ~/.local/bin/kitty"
+    echo "rm -f ~/.local/share/applications/kitty.desktop"
+    echo "rm -f ~/.local/share/applications/kitty-open.desktop"
+    echo "rm -f ~/.local/share/man/man1/kitty.1"
+    echo "rm -f ~/.local/share/man/man5/kitty.conf.5"
+    [ -d /Applications/kitty.app ] && echo "sudo rm -rf /Applications/kitty.app"
+  else
+    rm -rf ~/.local/kitty.app
+    rm -f ~/.local/bin/kitty
+    rm -f ~/.local/share/applications/kitty.desktop
+    rm -f ~/.local/share/applications/kitty-open.desktop
+    rm -f ~/.local/share/man/man1/kitty.1
+    rm -f ~/.local/share/man/man5/kitty.conf.5
+    [ -d /Applications/kitty.app ] && sudo rm -rf /Applications/kitty.app
+  fi
 }
 
 remove_neovim() {
@@ -664,7 +772,12 @@ fi
         exit 1
       }
     }
-    git clone https://github.com/doctorfree/neoman "${NEOMANDIR}"
+    if [ "${tellme}" ]
+    then
+      echo "git clone https://github.com/doctorfree/neoman ${NEOMANDIR}"
+    else
+      git clone https://github.com/doctorfree/neoman "${NEOMANDIR}"
+    fi
   }
   if [ -x "${NEOMANDIR}/scripts/install_configs.sh" ]
   then
@@ -874,8 +987,14 @@ fi
 
 # NeoMutt configuration user setup
 [ "${fedora}" ] && {
-  sudo dnf install dnf-plugins-core -y 2>/dev/null
-  sudo dnf copr enable flatcap/neomutt -y 2>/dev/null
+  if [ "${tellme}" ]
+  then
+    echo "sudo dnf install dnf-plugins-core -y"
+    echo "sudo dnf copr enable flatcap/neomutt -y"
+  else
+    sudo dnf install dnf-plugins-core -y 2>/dev/null
+    sudo dnf copr enable flatcap/neomutt -y 2>/dev/null
+  fi
 }
 [ -d ${CONFDIR}/neomutt ] && {
   [ -d ${USERCONF}/neomutt ] || {
@@ -1281,11 +1400,23 @@ fi
   [ "${python3_path}" ] && {
     python_dir=$(dirname ${python3_path})
     if [ -w ${python_dir} ]; then
-      rm -f ${python_dir}/python
-      ln -s ${python_dir}/python3 ${python_dir}/python
+      if [ "${tellme}" ]
+      then
+        echo "rm -f ${python_dir}/python"
+        echo "ln -s ${python_dir}/python3 ${python_dir}/python"
+      else
+        rm -f ${python_dir}/python
+        ln -s ${python_dir}/python3 ${python_dir}/python
+      fi
     else
-      sudo rm -f ${python_dir}/python
-      sudo ln -s ${python_dir}/python3 ${python_dir}/python
+      if [ "${tellme}" ]
+      then
+        echo "sudo rm -f ${python_dir}/python"
+        echo "sudo ln -s ${python_dir}/python3 ${python_dir}/python"
+      else
+        sudo rm -f ${python_dir}/python
+        sudo ln -s ${python_dir}/python3 ${python_dir}/python
+      fi
     fi
   }
 }
@@ -1304,15 +1435,35 @@ have_pip=$(type -p pip3)
     printf "\n\tInstalling pip ..."
   }
   if [ "${darwin}" ]; then
-    ${PYTHON} -m ensurepip --upgrade
+    if [ "${tellme}" ]
+    then
+      echo "${PYTHON} -m ensurepip --upgrade"
+    else
+      ${PYTHON} -m ensurepip --upgrade
+    fi
   else
     if [ "${debian}" ]; then
-      sudo ${APT} install python3-pip >/dev/null 2>&1
+      if [ "${tellme}" ]
+      then
+        echo "sudo ${APT} install python3-pip"
+      else
+        sudo ${APT} install python3-pip >/dev/null 2>&1
+      fi
     else
       if [ "${arch}" ]; then
-        sudo pacman -S --noconfirm python-pip >/dev/null 2>&1
+        if [ "${tellme}" ]
+        then
+          echo "sudo pacman -S --noconfirm python-pip"
+        else
+          sudo pacman -S --noconfirm python-pip >/dev/null 2>&1
+        fi
       else
-        sudo ${DNF} install python3-pip >/dev/null 2>&1
+        if [ "${tellme}" ]
+        then
+          echo "sudo ${DNF} install python3-pip"
+        else
+          sudo ${DNF} install python3-pip >/dev/null 2>&1
+        fi
       fi
     fi
   fi
@@ -1391,27 +1542,6 @@ have_neofetch=$(type -p neofetch)
 [ "${have_neofetch}" ] || install_package neofetch
 have_xclip=$(type -p xclip)
 [ "${have_xclip}" ] || install_package xclip
-
-FIGLET_DIR="/usr/share/figlet-fonts"
-FIGLET_ZIP="figlet-fonts.zip"
-zip_inst=$(type -p zip)
-if [ "${zip_inst}" ]; then
-  pyfig_inst=$(type -p pyfiglet)
-  [ "${pyfig_inst}" ] || {
-    ${PYTHON} -m pip install pyfiglet >/dev/null 2>&1
-    pyfig_inst=$(type -p pyfiglet)
-  }
-  if [ "${pyfig_inst}" ]; then
-    PYFIG=$(command -v pyfiglet)
-    ZIP=$(command -v zip)
-    if [ -d ${FIGLET_DIR} ]; then
-      cd ${FIGLET_DIR} || echo "Could not enter ${FIGLET_DIR}"
-      sudo ${ZIP} -q ${FIGLET_ZIP} ./*.flf
-      sudo ${PYFIG} -L ${FIGLET_ZIP} >/dev/null 2>&1
-      sudo rm -f ${FIGLET_ZIP}
-    fi
-  fi
-fi
 
 # Install btop if not already present
 have_btop=$(type -p btop)
