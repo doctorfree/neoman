@@ -118,7 +118,7 @@ fi
     ${SUDO} cp tmux.conf "${DESTDIR}/share/${PKG}"
   fi
 }
-[ -f "${DESTDIR}/share/${PKG}/rigle.conf" ] || {
+[ -f "${DESTDIR}/share/${PKG}/rifle.conf" ] || {
   if [ "${tellme}" ]
   then
     echo "${SUDO} cp rifle.conf ${DESTDIR}/share/${PKG}"
@@ -163,28 +163,28 @@ then
 else
   ${SUDO} cp share/menu/neoman "${DESTDIR}/share/menu/neoman"
 fi
-[ -d "${DESTDIR}/share/figlet-fonts" ] || {
+[ -d "${DESTDIR}/share/${PKG}/figlet-fonts" ] || {
   if [ "${tellme}" ]
   then
-    echo "${SUDO} cp -a share/figlet-fonts ${DESTDIR}/share/figlet-fonts"
+    echo "${SUDO} cp -a share/figlet-fonts ${DESTDIR}/share/${PKG}/figlet-fonts"
   else
-    ${SUDO} cp -a share/figlet-fonts "${DESTDIR}/share/figlet-fonts"
+    ${SUDO} cp -a share/figlet-fonts "${DESTDIR}/share/${PKG}/figlet-fonts"
   fi
 }
-[ -d "${DESTDIR}/share/neofetch-themes" ] || {
+[ -d "${DESTDIR}/share/${PKG}/neofetch-themes" ] || {
   if [ "${tellme}" ]
   then
-    echo "${SUDO} cp -a share/neofetch-themes ${DESTDIR}/share/neofetch-themes"
+    echo "${SUDO} cp -a share/neofetch-themes ${DESTDIR}/share/${PKG}/neofetch-themes"
   else
-    ${SUDO} cp -a share/neofetch-themes "${DESTDIR}/share/neofetch-themes"
+    ${SUDO} cp -a share/neofetch-themes "${DESTDIR}/share/${PKG}/neofetch-themes"
   fi
 }
 
 if [ "${tellme}" ]
 then
-  echo "${SUDO} chmod 644 ${DESTDIR}/share/figlet-fonts/*"
+  echo "${SUDO} chmod 644 ${DESTDIR}/share/${PKG}/figlet-fonts/*"
 else
-  ${SUDO} chmod 644 "${DESTDIR}"/share/figlet-fonts/*
+  ${SUDO} chmod 644 "${DESTDIR}"/share/${PKG}/figlet-fonts/*
 fi
 find "${DESTDIR}/share/doc/${PKG}" -type d | while read -r dir; do
   if [ "${tellme}" ]
