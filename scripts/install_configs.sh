@@ -45,9 +45,9 @@ shift $(( OPTIND - 1 ))
 
 if [ -d "${NEOMANDIR}" ]
 then
-  cd "${NEOMANDIR}"
+  cd "${NEOMANDIR}" || exit 1
 else
-  printf "\n\n${NEOMANDIR} does not exist or is not a directory"
+  printf "\n\n%s does not exist or is not a directory" "${NEOMANDIR}"
   printf "\nReinstall Neoman"
   exit 1
 fi
@@ -238,3 +238,4 @@ else
     "${DESTDIR}"/share/${PKG}/newsboat/scripts/* \
     "${DESTDIR}"/share/${PKG}/newsboat/scripts/*/*
 fi
+[ "${tellme}" ] || touch "${NEOMANDIR}"/.initialized
