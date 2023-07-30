@@ -1409,6 +1409,21 @@ python_install=1
   }
 }
 
+sunbeam_install=1
+[ -f "${INITIAL}" ] && {
+  grep "__install_sunbeam__" "${INITIAL}" >/dev/null || {
+    sunbeam_install=
+  }
+}
+[ "${sunbeam_install}" ] && {
+  [ -x "${NEOMANDIR}/scripts/install_sunbeam.sh" ] && {
+    "${NEOMANDIR}"/scripts/install_sunbeam.sh
+    [ -f "${INITIAL}" ] && {
+      echo "__install_sunbeam__=1" >>"${INITIAL}"
+    }
+  }
+}
+
 utils_install=1
 [ -f "${INITIAL}" ] && {
   grep "__install_utils__" "${INITIAL}" >/dev/null || {
@@ -1556,31 +1571,6 @@ else
   }
 fi
 
-have_googler=$(type -p googler)
-[ "${have_googler}" ] || {
-  [ -f ${HOME}/.local/bin/googler ] || {
-    [ -d ${HOME}/.local ] || mkdir -p ${HOME}/.local
-    [ -d ${HOME}/.local/bin ] || mkdir -p ${HOME}/.local/bin
-    GGDL_URL="${GHUC}/jarun/googler"
-    GGDL_VER="v4.3.2"
-    [ "${quiet}" ] || {
-      printf "\n\tInstalling googler ..."
-    }
-    curl --silent -o ${HOME}/.local/bin/googler \
-      ${GGDL_URL}/${GGDL_VER}/googler 2>/dev/null
-    curl --silent -o ${HOME}/.local/share/man/man1/googler.1 \
-      ${GGDL_URL}/${GGDL_VER}/googler.1 2>/dev/null
-    [ "${quiet}" ] || {
-      printf " done"
-    }
-  }
-
-  [ -f ${HOME}/.local/bin/googler ] && {
-    chmod +x ${HOME}/.local/bin/googler
-    ${HOME}/.local/bin/googler -u >/dev/null 2>&1
-  }
-}
-
 install_pipx
 
 # Install the 'rich' command if not already installed
@@ -1628,22 +1618,7 @@ curl -fsSL "${JETB_URL}" >/tmp/jetb-$$.sh
 }
 
 [ "${quiet}" ] || {
-  printf "\n\n\tA Neovim text editor configuration has been created for you in"
-  printf "\n\t\t${BOLD}${LMANDIR}/${NORM}"
-  printf "\n\tA good starting point for the Neovim user is the Neovim User Doc at:"
-  printf "\n\t\t${BOLD}https://neovim.io/doc/user/${NORM}"
-  printf "\n\tTry Neovim out by viewing your Neovim configuration:"
-  printf "\n\t\t${BOLD}export NVIM_APPNAME=\"nvim-Lazyman\" nvim${NORM}"
-  printf "\n\tCheck your configuration with the Neovim command:"
-  printf "\n\t\t${BOLD}:checkhealth${NORM}\n"
-
   printf "\n\n${BOLD}Neoman Initialization Complete${NORM}\n"
-  printf "\nLogout, open a new shell, or reinitialize your current shell"
-  printf "\nin order to set your execution PATH appropriately\n"
-  [ "${init_twit}" ] || {
-    printf "\nAuthorize the Rainbow Stream app at Twitter"
-    printf "\nby running the ${BOLD}'rainbowstream'${NORM} command\n"
-  }
   printf "\nVisit the Neoman Wiki at:"
   printf "\n\t${BOLD}https://github.com/doctorfree/neoman/wiki${NORM}\n"
 }
@@ -1671,7 +1646,9 @@ if [ "$ask_anim" ]; then
   }
 else
   [ "${quiet}" ] || {
-    printf "View an Neoman animation with:"
-    printf "\n\t${BOLD}asciisplash -c 1 -a -i${NORM}\n"
+    type -p asciisplash >/dev/null && {
+      printf "View an Neoman animation with:"
+      printf "\n\t${BOLD}asciisplash -c 1 -a -i${NORM}\n"
+    }
   }
 fi
