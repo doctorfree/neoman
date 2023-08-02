@@ -1,14 +1,10 @@
-```
- .-._           ,----.     _,.---._           ___    ,---.      .-._
-/==/ \  .-._ ,-.--` , \  ,-.' , -  `.  .-._ .'=.'\ .--.'  \    /==/ \  .-._
-|==|, \/ /, /==|-  _.-` /==/_,  ,  - \/==/ \|==|  |\==\-/\ \   |==|, \/ /, /
-|==|-  \|  ||==|   `.-.|==|   .=.     |==|,|  / - |/==/-|_\ |  |==|-  \|  |
-|==| ,  | -/==/_ ,    /|==|_ : ;=:  - |==|  \/  , |\==\,   - \ |==| ,  | -|
-|==| -   _ |==|    .-' |==| , '='     |==|- ,   _ |/==/ -   ,| |==| -   _ |
-|==|  /\ , |==|_  ,`-._ \==\ -    ,_ /|==| _ /\   /==/-  /\ - \|==|  /\ , |
-/==/, | |- /==/ ,     /  '.='. -   .' /==/  / / , |==\ _.\=\.-'/==/, | |- |
-`--`./  `--`--`-----``     `--`--''   `--`./  `--` `--`        `--`./  `--`
-```
+<h1 align="center">Neoman Multi-Configuration Manager</h1>
+
+<div align="center">
+<p float="left">
+  <img src="https://github.com/doctorfree/neoman/wiki/screenshots/neoman.png" style="width:700px;height:200px;">
+</p>
+</div>
 
 The `neoman` project can be used to install, initialize, configure, and manage
 `neovim`, `neomutt`, `newsboat`, `btop++`, `kitty`, `neofetch`, `w3m`, and `tmux`.
