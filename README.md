@@ -1,20 +1,21 @@
-```
- .-._           ,----.     _,.---._           ___    ,---.      .-._
-/==/ \  .-._ ,-.--` , \  ,-.' , -  `.  .-._ .'=.'\ .--.'  \    /==/ \  .-._
-|==|, \/ /, /==|-  _.-` /==/_,  ,  - \/==/ \|==|  |\==\-/\ \   |==|, \/ /, /
-|==|-  \|  ||==|   `.-.|==|   .=.     |==|,|  / - |/==/-|_\ |  |==|-  \|  |
-|==| ,  | -/==/_ ,    /|==|_ : ;=:  - |==|  \/  , |\==\,   - \ |==| ,  | -|
-|==| -   _ |==|    .-' |==| , '='     |==|- ,   _ |/==/ -   ,| |==| -   _ |
-|==|  /\ , |==|_  ,`-._ \==\ -    ,_ /|==| _ /\   /==/-  /\ - \|==|  /\ , |
-/==/, | |- /==/ ,     /  '.='. -   .' /==/  / / , |==\ _.\=\.-'/==/, | |- |
-`--`./  `--`--`-----``     `--`--''   `--`./  `--` `--`        `--`./  `--`
-```
+<h1 align="center">Neoman Multi-Configuration Manager</h1>
+
+<div align="center">
+<p float="left">
+  <img src="https://github.com/doctorfree/neoman/wiki/screenshots/neoman.png" style="width:700px;height:200px;">
+</p>
+</div>
 
 The `neoman` project can be used to install, initialize, configure, and manage
-`neovim`, `neomutt`, `newsboat`, `btop++`, `kitty`, `neofetch`, `w3m`, and `tmux`.
-All of these are powerful, configurable, character-based programs. Neoman
-automates the installation, initialization, configuration, and management
-of these tools using a command line and character menu interface.
+
+| **Neoman**                   | **Managed**                      | **Projects**                     | **Configs**                |
+| ---------------------------- | -------------------------------- | -------------------------------- | -------------------------- |
+| [neovim](#neovim-management) | [neomutt](#neomutt-management)   | [newsboat](#newsboat-management) | [btop++](#btop-management) |
+| [kitty](#kitty-management)   | [neofetch](#neofetch-management) | [w3m](#w3m-management)           | [tmux](#tmux-management)   |
+
+These are powerful, configurable, extensible, character-based programs. Neoman
+automates the installation, initialization, configuration, and management of
+these tools using a command line and character menu interface.
 
 [Note:] This project is in early development and not yet ready to install
 
@@ -61,7 +62,7 @@ NeoMutt configuration can be managed via the `neoman` menu system.
 The [Newsboat](https://newsboat.org) RSS/Atom feed reader is installed by
 Neoman and a rich `newsboat` configuration can be installed using `neoman`.
 
-## Btop++ management
+## Btop management
 
 The [Btop++](https://github.com/doctorfree/btop#readme) system resource monitor
 shows usage and stats for processor, memory, disks, network, and processes.
