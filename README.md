@@ -7,7 +7,12 @@
 </div>
 
 The `neoman` project can be used to install, initialize, configure, and manage
-`neovim`, `neomutt`, `newsboat`, `btop++`, `kitty`, `neofetch`, `w3m`, and `tmux`.
+
+| **Neoman** | **Managed** | **Tool**   | **Configurations** |
+| ---------- | ----------- | ---------- | ------------------ |
+| `neovim`   | `neomutt`   | `newsboat` | `btop++`           |
+| `kitty`    | `neofetch`  | `w3m`      | `tmux`             |
+
 All of these are powerful, configurable, character-based programs. Neoman
 automates the installation, initialization, configuration, and management
 of these tools using a command line and character menu interface.
