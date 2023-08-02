@@ -8,8 +8,9 @@
 
 The `neoman` project can be used to install, initialize, configure, and manage
 
-| **Neoman**                   | **Managed**                      | **Projects**                     | **Configs**                |
+| **Neoman**                   | **Managed**                      | **Project**                     | **Configs**                |
 | ---------------------------- | -------------------------------- | -------------------------------- | -------------------------- |
+| [Asciiville](#asciiville-management) | [MirrorCommand](#mirrorcommand-management) | [MusicPlayerPlus](#musicplayerplus-management) | [RoonCommandLine](#rooncommandline-management) |
 | [neovim](#neovim-management) | [neomutt](#neomutt-management)   | [newsboat](#newsboat-management) | [btop++](#btop-management) |
 | [kitty](#kitty-management)   | [neofetch](#neofetch-management) | [w3m](#w3m-management)           | [tmux](#tmux-management)   |
 
@@ -41,10 +42,26 @@ managing your Neoman system.
 The Neoman installation creates the `neoman` command which can be used to
 manage Neoman components via the command line or the Neoman menu interface.
 
+## Asciiville management
+
+See [https://asciiville.neoman.dev](https://asciiville.neoman.dev)
+
+## MirrorCommand management
+
+See [https://mirror.neoman.dev](https://mirror.neoman.dev)
+
+## MusicPlayerPlus management
+
+See [https://mpplus.neoman.dev](https://mpplus.neoman.dev)
+
+## RoonCommandLine management
+
+See [https://roon.neoman.dev](https://roon.neoman.dev)
+
 ## Neovim management
 
 Neoman uses the
-[Lazyman Neovim Configuration Manager](https://github.com/doctorfree/nvim-lazyman#readme)
+[Lazyman Neovim Configuration Manager](https://lazyman.neoman.dev)
 to install [Neovim](https://neovim.io/), tools, and dependencies as well as
 multiple Neovim configurations, and the
 [Bob](https://github.com/MordechaiHadad/bob) Neovim version manager.
