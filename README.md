@@ -44,24 +44,24 @@ manage Neoman components via the command line or the Neoman menu interface.
 
 ## Asciiville management
 
-See [https://asciiville.neoman.dev](https://asciiville.neoman.dev)
+See [https://asciiville.dev](https://asciiville.dev)
 
 ## MirrorCommand management
 
-See [https://mirror.neoman.dev](https://mirror.neoman.dev)
+See [https://mirrorcommand.dev](https://mirrorcommand.dev)
 
 ## MusicPlayerPlus management
 
-See [https://mpplus.neoman.dev](https://mpplus.neoman.dev)
+See [https://musicplayerplus.dev](https://musicplayerplus.dev)
 
 ## RoonCommandLine management
 
-See [https://roon.neoman.dev](https://roon.neoman.dev)
+See [https://rooncommand.dev](https://rooncommand.dev)
 
 ## Neovim management
 
 Neoman uses the
-[Lazyman Neovim Configuration Manager](https://lazyman.neoman.dev)
+[Lazyman Neovim Configuration Manager](https://lazyman.dev)
 to install [Neovim](https://neovim.io/), tools, and dependencies as well as
 multiple Neovim configurations, and the
 [Bob](https://github.com/MordechaiHadad/bob) Neovim version manager.
