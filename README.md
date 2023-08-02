@@ -8,14 +8,14 @@
 
 The `neoman` project can be used to install, initialize, configure, and manage
 
-| **Neoman** | **Managed** | **Tool**   | **Configurations** |
-| ---------- | ----------- | ---------- | ------------------ |
-| `neovim`   | `neomutt`   | `newsboat` | `btop++`           |
-| `kitty`    | `neofetch`  | `w3m`      | `tmux`             |
+| **Neoman**                   | **Managed**                      | **Projects**                     | **Configs**                |
+| ---------------------------- | -------------------------------- | -------------------------------- | -------------------------- |
+| [neovim](#neovim-management) | [neomutt](#neomutt-management)   | [newsboat](#newsboat-management) | [btop++](#btop-management) |
+| [kitty](#kitty-management)   | [neofetch](#neofetch-management) | [w3m](#w3m-management)           | [tmux](#tmux-management)   |
 
-All of these are powerful, configurable, character-based programs. Neoman
-automates the installation, initialization, configuration, and management
-of these tools using a command line and character menu interface.
+These are powerful, configurable, extensible, character-based programs. Neoman
+automates the installation, initialization, configuration, and management of
+these tools using a command line and character menu interface.
 
 [Note:] This project is in early development and not yet ready to install
 
@@ -62,7 +62,7 @@ NeoMutt configuration can be managed via the `neoman` menu system.
 The [Newsboat](https://newsboat.org) RSS/Atom feed reader is installed by
 Neoman and a rich `newsboat` configuration can be installed using `neoman`.
 
-## Btop++ management
+## Btop management
 
 The [Btop++](https://github.com/doctorfree/btop#readme) system resource monitor
 shows usage and stats for processor, memory, disks, network, and processes.
