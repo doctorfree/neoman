@@ -1,3 +1,19 @@
 remote_theme: doctorfree/jekyll-theme-neoman
 plugins:
   - jekyll-remote-theme
+
+title: Neoman Multi Manager
+email: ronaldrecord@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  The Neoman project can be used to install, initialize, configure, and manage
+  neovim, neomutt, newsboat, btop++, kitty, neofetch, w3m, and tmux.
+  All of these are powerful, configurable, character-based programs. Neoman
+  automates the installation, initialization, configuration, and management
+  of these tools using a command line and character menu interface.
+baseurl: ""
+url: "https://neoman.dev"
+twitter_username: ronrecord
+github_username: doctorfree
+
+show_downloads: false
+# google_analytics:
