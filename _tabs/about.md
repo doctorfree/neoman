@@ -12,17 +12,22 @@ order: 4
 </p>
 </div>
 
-The `neoman` project can be used to install, initialize, configure, and manage
+Neoman installs, initializes, configures, and manages the following
+open source character based projects:
 
-| **Neoman**                           | **Managed**                                | **Project**                                    | **Configs**                                    |
-| ------------------------------------ | ------------------------------------------ | ---------------------------------------------- | ---------------------------------------------- |
-| [Asciiville](#asciiville-management) | [MirrorCommand](#mirrorcommand-management) | [MusicPlayerPlus](#musicplayerplus-management) | [RoonCommandLine](#rooncommandline-management) |
-| [neovim](#neovim-management)         | [neomutt](#neomutt-management)             | [newsboat](#newsboat-management)               | [btop++](#btop-management)                     |
-| [kitty](#kitty-management)           | [neofetch](#neofetch-management)           | [w3m](#w3m-management)                         | [tmux](#tmux-management)                       |
-
-These are powerful, configurable, extensible, character-based programs. Neoman
-automates the installation, initialization, configuration, and management of
-these tools using a command line and character menu interface.
+- [Asciiville](https://asciiville.dev)
+- [MirrorCommand](https://mirrorcommand.dev)
+- [MusicPlayerPlus](https://musicplayerplus.dev)
+- [RoonCommandLine](https://rooncommand.dev)
+- [Neovim](https://neovim.io/)
+- [NeoMutt](https://github.com/neomutt/neomutt#readme)
+- [Btop](https://github.com/doctorfree/btop#readme)
+- [Kitty](https://sw.kovidgoyal.net/kitty)
+- [Neofetch](https://github.com/dylanaraps/neofetch)
+- [Newsboat](https://newsboat.org)
+- [Ascii Games]
+- [w3m](https://w3m.sourceforge.net)
+- [tmux](https://github.com/tmux/tmux/wiki)
 
 > [Note:] This project is in early development and not yet ready to install
 > {: .prompt-tip }
