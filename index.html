@@ -2,3 +2,167 @@
 layout: home
 # Index page
 ---
+
+<h1 align="center">Neoman Multi-Configuration Manager</h1>
+<div data-align="center">
+  <p float="left">
+    <img
+      src="https://github.com/doctorfree/neoman/wiki/screenshots/neoman.png"
+      style="width: 700px; height: 200px"
+    />
+  </p>
+</div>
+<p>
+  The <code>neoman</code> project can be used to install, initialize, configure,
+  and manage
+</p>
+<table style="width: 100%">
+  <colgroup>
+    <col style="width: 23%" />
+    <col style="width: 27%" />
+    <col style="width: 27%" />
+    <col style="width: 22%" />
+  </colgroup>
+  <thead>
+    <tr class="header">
+      <th><strong>Neoman</strong></th>
+      <th><strong>Managed</strong></th>
+      <th><strong>Project</strong></th>
+      <th><strong>Configs</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="odd">
+      <td><a href="#asciiville-management">Asciiville</a></td>
+      <td><a href="#mirrorcommand-management">MirrorCommand</a></td>
+      <td><a href="#musicplayerplus-management">MusicPlayerPlus</a></td>
+      <td><a href="#rooncommandline-management">RoonCommandLine</a></td>
+    </tr>
+    <tr class="even">
+      <td><a href="#neovim-management">neovim</a></td>
+      <td><a href="#neomutt-management">neomutt</a></td>
+      <td><a href="#newsboat-management">newsboat</a></td>
+      <td><a href="#btop-management">btop++</a></td>
+    </tr>
+    <tr class="odd">
+      <td><a href="#kitty-management">kitty</a></td>
+      <td><a href="#neofetch-management">neofetch</a></td>
+      <td><a href="#w3m-management">w3m</a></td>
+      <td><a href="#tmux-management">tmux</a></td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  These are powerful, configurable, extensible, character-based programs. Neoman
+  automates the installation, initialization, configuration, and management of
+  these tools using a command line and character menu interface.
+</p>
+<p>[Note:] This project is in early development and not yet ready to install</p>
+<h2 id="installation">Installation</h2>
+<p>
+  The initial installation of Neoman should be performed by a user with
+  <code>sudo</code> privileges, not the <code>root</code> user. Issue the
+  following two commands:
+</p>
+<div class="sourceCode" id="cb1">
+  <pre
+    class="sourceCode bash"
+  ><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"
+          tabindex="-1"></a><span class="co"># Install neoman with the following two commands:</span></span>
+      <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone
+        https://github.com/doctorfree/neoman <span class="va">$HOME</span>/.config/neoman</span>
+      <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">$HOME</span><span
+          class="ex">/.config/neoman/neoman</span></span></code></pre>
+</div>
+<p>
+  Subsequent use of the <code>neoman</code> command does not require
+  <code>sudo</code> privilege and can be performed by any user.
+</p>
+<p>
+  After installation is complete, run the <code>neoman</code> command to get
+  started managing your Neoman system.
+</p>
+<h2 id="the-neoman-command-and-menu-interface">
+  The neoman command and menu interface
+</h2>
+<p>
+  The Neoman installation creates the <code>neoman</code> command which can be
+  used to manage Neoman components via the command line or the Neoman menu
+  interface.
+</p>
+<h2 id="asciiville-management">Asciiville management</h2>
+<p>See <a href="https://asciiville.dev">https://asciiville.dev</a></p>
+<h2 id="mirrorcommand-management">MirrorCommand management</h2>
+<p>See <a href="https://mirrorcommand.dev">https://mirrorcommand.dev</a></p>
+<h2 id="musicplayerplus-management">MusicPlayerPlus management</h2>
+<p>See <a href="https://musicplayerplus.dev">https://musicplayerplus.dev</a></p>
+<h2 id="rooncommandline-management">RoonCommandLine management</h2>
+<p>See <a href="https://rooncommand.dev">https://rooncommand.dev</a></p>
+<h2 id="neovim-management">Neovim management</h2>
+<p>
+  Neoman uses the
+  <a href="https://lazyman.dev">Lazyman Neovim Configuration Manager</a> to
+  install <a href="https://neovim.io/">Neovim</a>, tools, and dependencies as
+  well as multiple Neovim configurations, and the
+  <a href="https://github.com/MordechaiHadad/bob">Bob</a> Neovim version
+  manager.
+</p>
+<h2 id="neomutt-management">NeoMutt management</h2>
+<p>
+  Neoman installs the versatile and highly configurable
+  <a href="https://github.com/neomutt/neomutt#readme">NeoMutt</a> command line
+  mail reader (based on Mutt) if not already present and installs a rich user
+  NeoMutt configuration. The Neoman NeoMutt configuration can be managed via the
+  <code>neoman</code> menu system.
+</p>
+<h2 id="newsboat-management">Newsboat management</h2>
+<p>
+  The <a href="https://newsboat.org">Newsboat</a> RSS/Atom feed reader is
+  installed by Neoman and a rich <code>newsboat</code> configuration can be
+  installed using <code>neoman</code>.
+</p>
+<h2 id="btop-management">Btop management</h2>
+<p>
+  The <a href="https://github.com/doctorfree/btop#readme">Btop++</a>
+  system resource monitor shows usage and stats for processor, memory, disks,
+  network, and processes. Neoman installs a precompiled
+  <code>btop</code> in native package format and provides a themed
+  <code>btop</code> user configuration.
+</p>
+<h2 id="kitty-management">Kitty management</h2>
+<p>
+  The fast, feature-rich, GPU based
+  <a href="https://sw.kovidgoyal.net/kitty">Kitty</a> terminal emulator is
+  installed and an extensive Kitty configuration made available by Neoman.
+</p>
+<h2 id="neofetch-management">Neofetch management</h2>
+<p>
+  The <a href="https://github.com/dylanaraps/neofetch">Neofetch</a> system
+  information tool is managed through the <code>neoman</code> menu interface.
+</p>
+<p>
+  Many <a href="share/neofetch-themes/README.md">Neofetch themes</a> are
+  included in <code>neoman</code> thanks primarily to the excellent work of
+  Github user <a href="https://github.com/Chick2D/neofetch-themes">Chick2D</a>.
+</p>
+<h2 id="w3m-management">W3m management</h2>
+<p>
+  <a href="https://w3m.sourceforge.net">w3m</a> is a text-based web browser as
+  well as a pager like <code>more</code> or <code>less</code>. With
+  <code>w3m</code> you can browse web pages through a terminal emulator window
+  (e.g. <code>kitty</code>). Moreover, <code>w3m</code> can be used as a text
+  formatting tool which typesets HTML into plain text.
+</p>
+<p>
+  Neoman installs <code>w3m</code> and provides an extensive
+  <code>w3m</code> configuration which includes a <code>mailcap</code>
+  tailored for use with a character browser.
+</p>
+<h2 id="tmux-management">Tmux management</h2>
+<p>
+  <a href="https://github.com/tmux/tmux/wiki">tmux</a> is a terminal
+  multiplexer. It enables multiple terminals to be created, accessed, and
+  controlled from a single screen. Neoman installs <code>tmux</code> if not
+  already present and provides an extensive user
+  <code>tmux</code> configuration.
+</p>
