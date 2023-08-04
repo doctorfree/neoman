@@ -77,8 +77,9 @@ available by Neoman.
 The [Neofetch](https://github.com/dylanaraps/neofetch) system information tool is managed
 through the `neoman` menu interface.
 
-Many [Neofetch themes](share/neofetch-themes/README.md) are included
-in `neoman` thanks primarily to the excellent work of Github user
+Many
+[Neofetch themes](https://github.com/doctorfree/neoman/blob/main/share/neofetch-themes/README.md)
+are included in `neoman` thanks primarily to the excellent work of Github user
 [Chick2D](https://github.com/Chick2D/neofetch-themes).
 
 ## W3m management
