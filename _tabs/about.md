@@ -4,7 +4,9 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-<h2 align="left">Neoman installs, initializes, configures, and manages the following open source character based projects:</h2>
+<h3 align="left">Neoman installs, initializes, configures, and manages multiple projects</h3>
+
+The following open source projects can be managed by Neoman:
 
 - [Asciiville](https://asciiville.dev)
 - [MirrorCommand](https://mirrorcommand.dev)
@@ -20,5 +22,4 @@ order: 4
 - [w3m](https://w3m.sourceforge.net)
 - [tmux](https://github.com/tmux/tmux/wiki)
 
-> This project is in early development and not yet ready to install
-> {: .prompt-tip }
+> This project is in early development and not yet ready to install{: .prompt-tip }

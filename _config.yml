@@ -174,7 +174,6 @@ exclude:
   - "*.gem"
   - "*.gemspec"
   - tools
-  - README.md
   - CHANGELOG.md
   - LICENSE
   - rollup.config.js
