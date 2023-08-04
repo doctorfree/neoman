@@ -14,9 +14,9 @@ timezone: America/Los_Angeles
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Neoman Multi Manager
+title: Neoman
 
-tagline: Multi Project Manager # it will display as the sub-title
+tagline: Manage Multiple Projects # it will display as the sub-title
 
 description: >- # this means to ignore newlines until "baseurl:"
   The Neoman project can be used to install, initialize, configure, and manage
