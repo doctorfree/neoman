@@ -28,7 +28,7 @@ baseurl: ""
 url: "https://neoman.dev"
 
 github:
-  username: doctorfree # change to your github username
+  username: doctorfree/neoman # change to your github username
 
 twitter:
   username: ronrecord # change to your twitter username
