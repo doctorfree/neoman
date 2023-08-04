@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 2
+order: 3
 ---
 
 <h3 align="left">Neoman installs, initializes, configures, and manages multiple projects</h3>
